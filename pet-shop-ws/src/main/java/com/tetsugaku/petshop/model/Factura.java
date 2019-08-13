@@ -1,5 +1,6 @@
 package com.tetsugaku.petshop.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -48,7 +49,7 @@ public class Factura extends AuditModel {
 	@ApiModelProperty(notes="Cliente de la factura", position=1)
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@JsonIgnore
-	private Cliente cliente;
+	private Client cliente;
 	
 	@ApiModelProperty(notes="Fecha y hora de factura", position=2)
 	@NotNull    
@@ -62,16 +63,27 @@ public class Factura extends AuditModel {
     private Double total;
 	
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true) 
+	@JsonIgnore
 	private Collection<Detalle> detalles;
 	
 	public void addDetalle(Detalle detalle) {
-        detalles.add(detalle);
+        if(detalles==null) {
+        	detalles = new ArrayList<Detalle>();
+        }
+        if(this.total==null) this.total = 0.0;
+        
+		detalles.add(detalle);
         detalle.setFactura(this);
+        
+        this.total += detalle.getTotal();
     }
 	
 	public void removeDetalle(Detalle detalle) {
-        detalles.remove(detalle);
-        detalle.setFactura(null);
+        if(detalles != null) {
+        	detalles.remove(detalle);
+        	detalle.setFactura(null);
+        	this.total -= detalle.getTotal();
+        }
     }
 	
 }
