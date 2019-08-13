@@ -1,50 +1,91 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA  } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MatButtonModule,
+  MatDividerModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatTabsModule,
+  MatListModule,
+  MatSidenavModule,
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogModule
+} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// rutas
+import {ShoppingCartModule} from 'ng-shopping-cart';
+import { ProductCartItem } from './products/product-cart-item';
+
 import { AppRoutingModule } from './app-routing.module';
-
-// servicios
-import { HeroesService } from './services/heroes.service';
-// MDBBootstrapModule
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
-import { ProductosService } from './services/productos.service';
-import { ProductosComponent } from './components/productos/productos.component';
-import { ProductoComponent } from './components/producto/producto.component';
-import { CompraComponent } from './components/compra/compra.component';
+import { HomeComponent } from './home/home.component';
+import { CustomCarItemComponent } from './custom-car-item/custom-car-item.component';
+import { CustomCartViewComponent } from './custom-cart-view/custom-cart-view.component';
+import { CustomCarCheckoutComponent } from './custom-car-checkout/custom-car-checkout.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminClientComponent } from './admin/admin-client/admin-client.component';
+import { AdminInvoiceComponent } from './admin/admin-invoice/admin-invoice.component';
+import { AdminProductComponent } from './admin/admin-product/admin-product.component';
+import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     HomeComponent,
-    AboutComponent,
-    CarouselComponent,
-    ProductosComponent,
-    ProductoComponent,
-    CompraComponent
-
+    CustomCarItemComponent,
+    CustomCartViewComponent,
+    CustomCarCheckoutComponent,
+    AdminComponent,
+    AdminClientComponent,
+    AdminInvoiceComponent,
+    AdminProductComponent,
+    AdminCategoryComponent,
+    CatalogComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatListModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
     FormsModule,
-    MDBBootstrapModule.forRoot()
+    ReactiveFormsModule,
+    ShoppingCartModule.forRoot({ // <-- Add the cart module to your root module
+      itemType: ProductCartItem, // <-- Configuration is optional
+      serviceType: 'localStorage',
+      serviceOptions: {
+        storageKey: 'NgShoppingCart',
+        clearOnError: true
+      }
+    })
   ],
-  providers: [
-    HeroesService,
-    ProductosService
-  ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  providers: [],
+  entryComponents: [CustomCarItemComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

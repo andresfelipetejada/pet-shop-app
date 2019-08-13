@@ -4,35 +4,34 @@
   "newProjectRoot": "projects",
   "projects": {
     "pet-shop-front": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "projectType": "application",
       "prefix": "app",
-      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/pet-shop-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
+            "aot": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "node_modules/font-awesome/scss/font-awesome.scss",
-              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "node_modules/ng-shopping-cart/styles/css/ng-shopping-cart.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"
-            ],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -56,6 +55,11 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -83,43 +87,32 @@
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "node_modules/font-awesome/scss/font-awesome.scss",
-              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
-            ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"],
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ]
+            ],
+            "styles": [
+              "node_modules/ng-shopping-cart/styles/css/ng-shopping-cart.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        }
-      }
-    },
-    "pet-shop-front-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
+        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -131,18 +124,8 @@
               "devServerTarget": "pet-shop-front:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
-    }
-  },
+    }},
   "defaultProject": "pet-shop-front"
 }

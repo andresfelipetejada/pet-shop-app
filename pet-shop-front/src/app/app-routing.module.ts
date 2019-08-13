@@ -1,18 +1,33 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { ProductosComponent } from './components/productos/productos.component';
-import { ProductoComponent } from './components/producto/producto.component';
-import { CompraComponent } from './components/compra/compra.component';
+import { HomeComponent } from './home/home.component';
+import { CustomCartViewComponent } from './custom-cart-view/custom-cart-view.component';
+import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
+import { AdminProductComponent } from './admin/admin-product/admin-product.component';
+import { AdminClientComponent } from './admin/admin-client/admin-client.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'productos', component: ProductosComponent },
-  { path: 'producto/:id', component: ProductoComponent },
-  { path: 'comprar/:id', component: CompraComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'car-shop',
+    component: CustomCartViewComponent
+  },
+  {
+    path: 'admin/category',
+    component: AdminCategoryComponent
+  },
+  {
+    path: 'admin/product',
+    component: AdminProductComponent
+  },
+  {
+    path: 'admin/client',
+    component: AdminClientComponent
+  }
+
 ];
 
 @NgModule({

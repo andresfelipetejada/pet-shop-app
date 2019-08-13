@@ -242,3 +242,5 @@ typings/
 .history
 
 # End of https://www.gitignore.io/api/git,svn,node,java,angular,eclipse,visualstudiocode
+
+workspace-eclipse/

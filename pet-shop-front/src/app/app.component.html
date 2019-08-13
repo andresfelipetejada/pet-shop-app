@@ -1,5 +1,41 @@
-<app-navbar></app-navbar>
+<mat-sidenav-container class="all-wrap">
 
-<div class="container main-container">
-    <router-outlet></router-outlet>
-</div>
+    <mat-sidenav #sidenav over>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let route of routes"
+          [routerLink]="route.path"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon>code</mat-icon>&emsp;{{route.name}}
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content class="page-wrap img-bg">  
+      <mat-toolbar>        
+        <mat-toolbar-row>
+          <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon" (click)="sidenav.open()">menu</mat-icon>
+          <span>
+            <button mat-button routerLink="/">Tienda de Mascotas</button>
+          </span>
+          <span class="example-spacer"></span>
+          <button mat-button routerLink="/car-shop">
+            <cart-summary [icon]="icon" [noItemsText]="noItemsText" [oneItemText]="oneItemText"
+                [manyItemsText]="manyItemsText">
+            </cart-summary>    
+          </button>          
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+  
+      <footer>
+        <h2>{{title}}</h2>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      </footer>
+  
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
